@@ -58,7 +58,9 @@ The script uses "Joanna" by default, but you can modify the code to use other vo
 ## Examples
 
 ```
-python polly_tts.py --profile myprofile --output hello.mp3 --voice Ruth "Hello World"
+python polly_tts.py --output hello.mp3 --voice Ruth "Hello World"
+python polly_tts.py --engine generative --text-type ssml "<speak>Hello <emphasis>world</emphasis></speak>"
+python polly_tts.py --engine generative --output phoneme.mp3 --voice Ruth -t ssml --file phoneme.ssml
 ```
 
 ## Open MP3
@@ -66,3 +68,14 @@ python polly_tts.py --profile myprofile --output hello.mp3 --voice Ruth "Hello W
 ```
 vlc hello.mp3 
 ```
+
+## Helper script
+
+list_voices.py can list all of the voices available for each engine. It paginates through all voices from the Polly API and displays them in a table with ID, name, gender, language code, and language name.
+
+```
+python list_voices.py --engine neural
+python list_voices.py --engine standard              
+python list_voices.py --engine generative
+python list_voices.py -e neural                             
+```                                         

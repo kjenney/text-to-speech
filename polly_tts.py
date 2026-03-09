@@ -12,7 +12,7 @@ from pydub import AudioSegment
 from io import BytesIO
 
 
-def text_to_speech(text, output_file="output.mp3", voice_id="Joanna", engine="neural", aws_profile=None, volume_decrease=0):
+def text_to_speech(text, output_file="output.mp3", voice_id="Joanna", engine="neural", aws_profile=None, volume_decrease=0, text_type="text"):
     """
     Convert text to speech using AWS Polly and save as MP3.
 
@@ -42,7 +42,8 @@ def text_to_speech(text, output_file="output.mp3", voice_id="Joanna", engine="ne
             Text=text,
             OutputFormat='mp3',
             VoiceId=voice_id,
-            Engine=engine
+            Engine=engine,
+            TextType=text_type
         )
 
         # Access the audio stream from the response
@@ -99,6 +100,8 @@ Examples:
     parser.add_argument('--output', '-o', default='polly_output.mp3', help='Output filename (default: polly_output.mp3)')
     parser.add_argument('--engine', '-e', choices=['neural', 'standard', 'generative'], default='neural',
                         help='Engine type: neural, standard, or generative (default: neural)')
+    parser.add_argument('--text-type', '-t', choices=['text', 'ssml'], default='text',
+                        help='Text type: text or ssml (default: text)')
     parser.add_argument('--volume', type=float, default=0,
                         help='Volume decrease in dB (positive values decrease, negative increase, default: 0)')
 
@@ -124,7 +127,8 @@ Examples:
         voice_id=args.voice,
         engine=args.engine,
         aws_profile=args.profile,
-        volume_decrease=args.volume
+        volume_decrease=args.volume,
+        text_type=args.text_type
     )
 
     if success:
