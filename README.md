@@ -1,4 +1,4 @@
-# polly
+# text-to-speech
 
 Use AWS Polly to generate speech from text in the form of mp3 files.
 
